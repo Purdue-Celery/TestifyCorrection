@@ -494,7 +494,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         //show dialog box for entering new choice
         //add choice to list and reload
         String newChoice = JOptionPane.showInputDialog(null, "Please enter a new choice", "New Choice", JOptionPane.QUESTION_MESSAGE);
-        ((MultipleChoice) question).addChoice(newChoice);
+        // Black Box Defect #6 - ((MultipleChoice) question).addChoice(newChoice);
         ((MultipleChoice) question).addChoice(newChoice);
         saveQuestion();
         loadQuestion(question);
