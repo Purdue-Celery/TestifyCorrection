@@ -808,6 +808,7 @@ public class InstructorTestify extends javax.swing.JFrame {
 
         promptTextArea.setText(loadQ.getPrompt());
         answerTextArea.setText(loadQ.getAnswer());
+        pointsPossTextField.setText(Integer.toString(loadQ.getPtsPossible()));
 
         if (loadQ.getClass().equals(MultipleChoice.class)) {
 
