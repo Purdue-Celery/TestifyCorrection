@@ -462,12 +462,12 @@ public class InstructorTestify extends javax.swing.JFrame {
     private void prevQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevQButtonActionPerformed
         // TODO add your handling code here:
         saveQuestion();
-        if(!(test.length() == 0) && current < test.length()){
+        if(!(test.length() == 0) && current > 1){
         
         isNew = false;
-        current++;
-        question = test.getQuestion(current - 1);
-        questionComboBox.setSelectedIndex(current - 1);
+        current--;
+        question = test.getQuestion(current-1);
+        questionComboBox.setSelectedIndex(current-1);
         loadQuestion(question);
         }
 
@@ -476,13 +476,13 @@ public class InstructorTestify extends javax.swing.JFrame {
     private void nextQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQButtonActionPerformed
         // TODO add your handling code here:
         saveQuestion();
-        if(!(test.length() == 0) && current > 1){
-         
-        isNew = false;
+        if(!(test.length() == 0) && current < test.length()){
         current--;
-        question = test.getQuestion(current - 1);
-        questionComboBox.setSelectedIndex(current - 1);
+        isNew = false;
+        question = test.getQuestion(current+1);
+        questionComboBox.setSelectedIndex(current+1);
         loadQuestion(question);
+        
         }
         
        
