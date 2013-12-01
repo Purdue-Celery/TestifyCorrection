@@ -506,6 +506,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         saveQuestion();
         int index = choicesList.getSelectedIndex();
         if (index != -1) {
+        	((MultipleChoice) question).removeChoice(listModel.get(index));
             listModel.removeElementAt(index);
         }
     }//GEN-LAST:event_deleteChoiceButtonActionPerformed
