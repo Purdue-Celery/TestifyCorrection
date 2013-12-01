@@ -431,7 +431,11 @@ public class InstructorTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void newSAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSAActionPerformed
-        if (((ArrayList) test.getQuestions()).size() != 50) {
+        
+        if(((ArrayList) test.getQuestions()).size() > 0){
+        	saveQuestion();
+        }
+    	if (((ArrayList) test.getQuestions()).size() != 50) {
             Question newQ = new ShortAnswer();
             isNew = true;
             question = newQ;
@@ -463,12 +467,14 @@ public class InstructorTestify extends javax.swing.JFrame {
         // TODO add your handling code here:
         saveQuestion();
         if(!(test.length() == 0) && current > 1){
-        
         isNew = false;
         current--;
-        question = test.getQuestion(current-1);
         questionComboBox.setSelectedIndex(current-1);
+        int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
+        question = test.getQuestion(qNum - 1);
         loadQuestion(question);
+        
+        //loadQuestion(question);
         }
 
     }//GEN-LAST:event_prevQButtonActionPerformed
@@ -479,15 +485,13 @@ public class InstructorTestify extends javax.swing.JFrame {
         if(!(test.length() == 0) && current < test.length()){
         current--;
         isNew = false;
-        question = test.getQuestion(current+1);
+        question = test.getQuestion(current);
         questionComboBox.setSelectedIndex(current+1);
+        int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
+        question = test.getQuestion(qNum - 1);
         loadQuestion(question);
         
         }
-        
-       
-
-
     }//GEN-LAST:event_nextQButtonActionPerformed
 
     private void addChoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addChoiceButtonActionPerformed
@@ -575,7 +579,10 @@ public class InstructorTestify extends javax.swing.JFrame {
     }
 
     private void newMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMCActionPerformed
-        if (((ArrayList) test.getQuestions()).size() != 50) {
+    	if(((ArrayList) test.getQuestions()).size() > 0){
+        	saveQuestion();
+        }
+    	if (((ArrayList) test.getQuestions()).size() != 50) {
             Question newQ = new MultipleChoice();
             isNew = true;
             question = newQ;
@@ -587,7 +594,10 @@ public class InstructorTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_newMCActionPerformed
 
     private void newProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProgActionPerformed
-        if (((ArrayList) test.getQuestions()).size() != 50) {
+    	if(((ArrayList) test.getQuestions()).size() > 0){
+        	saveQuestion();
+        }
+    	if (((ArrayList) test.getQuestions()).size() != 50) {
             Question newQ = new Programming();
             isNew = true;
             question = newQ;
@@ -934,6 +944,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         String prompt, answer, ptsPossStr;
         prompt = promptTextArea.getText();
         answer = answerTextArea.getText();
+        //System.out.println("saved answer is:" + answer);
         ptsPossStr = pointsPossTextField.getText();
         int ptsPoss = 0;
 
@@ -941,8 +952,14 @@ public class InstructorTestify extends javax.swing.JFrame {
             error("You must enter a prompt.");
 
         } else {
-            
             question.setPrompt(promptTextArea.getText());
+        }
+        
+        if (answer.equals("")) {
+            error("You must enter an answer.");
+
+        } else {
+            question.setAnswer(answerTextArea.getText());
         }
 
         if (ptsPossStr.equals("")) {
