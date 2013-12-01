@@ -613,6 +613,7 @@ public class StudentTestify extends javax.swing.JFrame {
         if (questionIndex==questions.size()-1) {
             saveTestObject();
             Next.setText("Next");
+            Next.setEnabled(false);
             return;
         }
         else if(questionIndex==questions.size()-2)
@@ -638,6 +639,7 @@ public class StudentTestify extends javax.swing.JFrame {
             nameError.setVisible(true);
             return;
         }
+        Next.setEnabled(true);
     	saveAnswer(questions.get(questionIndex).getClass().getSimpleName());
         if (questionIndex == questions.size()-2) {
             Next.setText("Submit");
