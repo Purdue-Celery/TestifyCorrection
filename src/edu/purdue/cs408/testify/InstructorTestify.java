@@ -440,6 +440,7 @@ public class InstructorTestify extends javax.swing.JFrame {
             isNew = true;
             question = newQ;
             test.add(newQ);
+            System.out.println("length :" + test.length());
             current = test.length();
             resetQuestionComboBox();
             loadQuestion(newQ);
@@ -483,6 +484,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         // TODO add your handling code here:
         saveQuestion();
         if(!(test.length() == 0) && current < test.length()){
+        	System.out.println(current+ " " +test.length());
         current--;
         isNew = false;
         question = test.getQuestion(current);
@@ -490,7 +492,6 @@ public class InstructorTestify extends javax.swing.JFrame {
         int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
         question = test.getQuestion(qNum - 1);
         loadQuestion(question);
-        
         }
     }//GEN-LAST:event_nextQButtonActionPerformed
 
@@ -775,7 +776,7 @@ public class InstructorTestify extends javax.swing.JFrame {
     private void reconstructComboBox() {
         questionComboBox.removeAllItems();
         String s[] = new String[test.length()];
-        for (int i = 0; i < test.length() - 1; i++) {
+        for (int i = 0; i < test.length(); i++) {
             s[i] = Integer.toString(i + 1);
         }
 
@@ -902,6 +903,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         if ( test.length() <= 0) {
             newTest();
         } else {
+        	System.out.println(test.length());
             question = test.getQuestion(0);
             current = 1;
             loadQuestion(question);
