@@ -572,10 +572,6 @@ public class InstructorTestify extends javax.swing.JFrame {
         PropDialog p = new PropDialog(this, true, test);
         p.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         p.setVisible(true);
-        
-        PropDialog p1 = new PropDialog(this, true, test);
-        p1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        p1.setVisible(true);
         //p.toFront();
     }
 
