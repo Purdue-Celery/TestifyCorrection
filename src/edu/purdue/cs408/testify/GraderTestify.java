@@ -401,7 +401,11 @@ public class GraderTestify extends javax.swing.JFrame {
                 testFile = openFileChooser.getSelectedFile();
                 try {
                     openedTest = Test.open(testFile);
-                    if (openedTest.length() != key.length()) {
+                    if (key==null){
+                    	JOptionPane.showMessageDialog(null, "You should open key first!", "Error", JOptionPane.ERROR_MESSAGE);
+                    	return;
+                    }
+                    else if (openedTest.length() != key.length()) {
                         JOptionPane.showMessageDialog(null, "Error", "Key and student's exam are not of same length.", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -551,7 +555,11 @@ public class GraderTestify extends javax.swing.JFrame {
                     }
                 }
             }
-        loadQuestion(question);
+        try{
+        	loadQuestion(question);
+        }catch(Exception e){
+        	JOptionPane.showMessageDialog(null, "You need to first load the key and student exam.");
+        }
     }//GEN-LAST:event_autogradeMenuItemActionPerformed
 
     private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
