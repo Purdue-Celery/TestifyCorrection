@@ -435,10 +435,10 @@ public class GraderTestify extends javax.swing.JFrame {
     private void prevQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevQButtonActionPerformed
         // TODO add your handling code here:
         saveQuestion();
-        if(!(test.length() == 0) && current < test.length()){
+        if(!(test.length() == 0) && current <= test.length()){
         
         isNew = false;
-        current++;
+        current--;
         question = test.getQuestion(current - 1);
         questionComboBox.setSelectedIndex(current - 1);
         loadQuestion(question);
@@ -448,10 +448,10 @@ public class GraderTestify extends javax.swing.JFrame {
     private void nextQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQButtonActionPerformed
         // TODO add your handling code here:
          saveQuestion();
-        if(!(test.length() == 0) && current > 1){
+        if(!(test.length() == 0) && current >= 1){
         
         isNew = false;
-        current--;
+        current++;
         question = test.getQuestion(current - 1);
         questionComboBox.setSelectedIndex(current - 1);
         loadQuestion(question);
@@ -505,8 +505,8 @@ public class GraderTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_pointsPossTextFieldActionPerformed
 
     private void questionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionComboBoxActionPerformed
+    	 saveQuestion();
         if (questionComboBox.getSelectedItem() != null && !((String) (questionComboBox.getSelectedItem())).equals("" + current)) {
-            saveQuestion();
             isNew = false;
             int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
             current = qNum;
@@ -544,7 +544,11 @@ public class GraderTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_openKeyMenuItemActionPerformed
 
     private void autogradeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autogradeMenuItemActionPerformed
-
+    	try{
+        	loadQuestion(question);
+        }catch(Exception e){
+        	JOptionPane.showMessageDialog(null, "You need to first load the key and student exam.");
+        }
             for (int i = 0; i < test.length(); i++) {
                 Question q = test.getQuestion(i);
                 if (q.getClass().equals(MultipleChoice.class)) {
@@ -555,11 +559,7 @@ public class GraderTestify extends javax.swing.JFrame {
                     }
                 }
             }
-        try{
-        	loadQuestion(question);
-        }catch(Exception e){
-        	JOptionPane.showMessageDialog(null, "You need to first load the key and student exam.");
-        }
+        
     }//GEN-LAST:event_autogradeMenuItemActionPerformed
 
     private void summaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaryButtonActionPerformed
@@ -818,15 +818,15 @@ public class GraderTestify extends javax.swing.JFrame {
         if (key != null) {
             key.getQuestion(current - 1).setAnswer(keyAnswerTextArea.getText());
         }
-//        if (isNew) {
-//            test.add(question);
-//        }
+        //if (isNew) {
+        //    test.add(question);
+        //}
     }
 
     private void initComponentLists() {
         disableableComponents = new JComponent[]{
-            commentsTextArea,
-            commentsLabel,
+            //commentsTextArea,
+            //commentsLabel,
             choicesLabel,
             choicesList,
             langLabel,};
