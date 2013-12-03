@@ -4,20 +4,27 @@
  */
 package edu.purdue.cs408.testify;
 
+import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Austin
  */
 public class PropDialog extends javax.swing.JDialog {
+	Frame frame;
     Test test;
+    boolean invalid = false;
     /**
      * Creates new form PropDialog
      */
     public PropDialog(java.awt.Frame parent, boolean modal, Test test) {
         super(parent, modal);
+        frame = parent;
         this.test = test;
         this.setTitle("Test Properties");
         initComponents();
@@ -158,7 +165,14 @@ public class PropDialog extends javax.swing.JDialog {
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         saveProperties();
-        this.dispose();
+        if(invalid)
+        {
+        	invalid =false;
+        }
+        else{
+        	this.dispose();
+        }
+        	
     }//GEN-LAST:event_doneButtonActionPerformed
 
     private void invalidateCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invalidateCheckboxActionPerformed
@@ -173,9 +187,65 @@ public class PropDialog extends javax.swing.JDialog {
     private void saveProperties() {
         String dateText = dateField.getText();
         String stText = stTimeField.getText();
-        test.setDate(new Date(dateField.getText()));
-        test.setStartTime(new Time(stTimeField.getText()));
-        test.setEndTime(new Time(endTimeField.getText()));
+        try{
+        	test.setDate(new Date(dateField.getText()));
+        }catch (Exception e){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Please enter a valid date",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        try{
+        	test.setStartTime(new Time(stTimeField.getText()));
+        }catch (Exception e){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Please enter a valid start time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        try{
+        	test.setEndTime(new Time(endTimeField.getText()));
+        }catch (Exception e){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Please enter a valid end time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        if(new Time(endTimeField.getText()).am == true && new Time(stTimeField.getText()).am == false){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Start time must before end time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        if(new Time(endTimeField.getText()).am == new Time(stTimeField.getText()).am && new Time(endTimeField.getText()).hour< new Time(stTimeField.getText()).hour){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Start time must before end time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        if(new Time(endTimeField.getText()).am == new Time(stTimeField.getText()).am && new Time(endTimeField.getText()).hour== new Time(stTimeField.getText()).hour 
+        		&& new Time(endTimeField.getText()).minute < new Time(stTimeField.getText()).minute){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Start time must before end time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        if(new Time(endTimeField.getText()).am == new Time(stTimeField.getText()).am && new Time(endTimeField.getText()).hour== new Time(stTimeField.getText()).hour 
+        		&& new Time(endTimeField.getText()).minute == new Time(stTimeField.getText()).minute
+        		&&new Time(endTimeField.getText()).second < new Time(stTimeField.getText()).second){
+        	invalid = true;
+        	JOptionPane.showMessageDialog(frame,
+        		    "Start time must before end time",
+        		    "Inane error",
+        		    JOptionPane.ERROR_MESSAGE);
+        }
+        
         test.setEnableCompilation(compCheckbox.isSelected());
         test.setInvalidateOnFocus(invalidateCheckbox.isSelected());
     }

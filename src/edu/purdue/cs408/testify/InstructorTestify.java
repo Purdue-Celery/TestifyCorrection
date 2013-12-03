@@ -31,6 +31,7 @@ import javax.swing.text.NumberFormatter;
  */
 public class InstructorTestify extends javax.swing.JFrame {
 
+	private boolean invalid = false;
     Test test;
     File testFile;
     Question question;
@@ -483,16 +484,23 @@ public class InstructorTestify extends javax.swing.JFrame {
     private void nextQButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextQButtonActionPerformed
         // TODO add your handling code here:
         saveQuestion();
-        if(!(test.length() == 0) && current < test.length()){
-        	System.out.println(current+ " " +test.length());
-        current--;
-        isNew = false;
-        question = test.getQuestion(current);
-        questionComboBox.setSelectedIndex(current+1);
-        int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
-        question = test.getQuestion(qNum - 1);
-        loadQuestion(question);
+        if(invalid){
+        	invalid = false;
         }
+        else
+        {
+        	if(!(test.length() == 0) && current < test.length()){
+            	System.out.println(current+ " " +test.length());
+            current--;
+            isNew = false;
+            question = test.getQuestion(current);
+            questionComboBox.setSelectedIndex(current+1);
+            int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
+            question = test.getQuestion(qNum - 1);
+            loadQuestion(question);
+            }
+        }
+        
     }//GEN-LAST:event_nextQButtonActionPerformed
 
     private void addChoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addChoiceButtonActionPerformed
@@ -527,15 +535,21 @@ public class InstructorTestify extends javax.swing.JFrame {
         // TODO add your handling code here:
         // open file selection dialog
         saveQuestion();
-        if (testFile == null) {
-            saveMenuItemActionPerformed(evt);
-        } else {
-            try {
-                test.save(testFile);
-            } catch (IOException ex) {
-                System.out.println("problem accessing file" + testFile.getAbsolutePath());
+        if(invalid){
+        	invalid = false;
+        }
+        else{
+        	if (testFile == null) {
+                saveMenuItemActionPerformed(evt);
+            } else {
+                try {
+                    test.save(testFile);
+                } catch (IOException ex) {
+                    System.out.println("problem accessing file" + testFile.getAbsolutePath());
+                }
             }
         }
+        
         
         // save test to specified file
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
@@ -545,19 +559,25 @@ public class InstructorTestify extends javax.swing.JFrame {
         // open file selection dialog if file doesnt exist
         // save test to specified file
        saveQuestion();
-        int returnVal = fileChooser.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            testFile = fileChooser.getSelectedFile();
-            try {
-                // What to do with the file, e.g. display it in a TextArea
-                //textarea.read(new FileReader(file.getAbsolutePath()), null);
-                test.save(testFile);
-            } catch (IOException ex) {
-                System.out.println("problem accessing file" + testFile.getAbsolutePath());
-            }
-        } else {
-            System.out.println("File access cancelled by user.");
-        }
+       if(invalid){
+    	   invalid = false;
+       }
+       else{
+    	   int returnVal = fileChooser.showSaveDialog(this);
+           if (returnVal == JFileChooser.APPROVE_OPTION) {
+               testFile = fileChooser.getSelectedFile();
+               try {
+                   // What to do with the file, e.g. display it in a TextArea
+                   //textarea.read(new FileReader(file.getAbsolutePath()), null);
+                   test.save(testFile);
+               } catch (IOException ex) {
+                   System.out.println("problem accessing file" + testFile.getAbsolutePath());
+               }
+           } else {
+               System.out.println("File access cancelled by user.");
+           }
+       }
+        
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
     private void propMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propMenuItemActionPerformed
@@ -928,6 +948,7 @@ public class InstructorTestify extends javax.swing.JFrame {
             String filename = fileTextField.getText();
             if (filename == null || filename.equals("")) {
                 error("You must enter a file name for this question.");
+                invalid = true;
 
             } else {
                 ((Programming) question).setFile(fileTextField.getText());
@@ -949,6 +970,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         int ptsPoss = 0;
 
         if (prompt.equals("")) {
+        	invalid = true;
             error("You must enter a prompt.");
 
         } else {
@@ -956,6 +978,7 @@ public class InstructorTestify extends javax.swing.JFrame {
         }
         
         if (answer.equals("")) {
+        	invalid = true;
             error("You must enter an answer.");
 
         } else {
@@ -963,18 +986,33 @@ public class InstructorTestify extends javax.swing.JFrame {
         }
 
         if (ptsPossStr.equals("")) {
+        	invalid = true;
             error("You must enter an amount of points possible.");
 
         } else {
-            question.setPtsPossible(Integer.parseInt(ptsPossStr));
+        	try{
+        		if(Integer.parseInt(ptsPossStr)< 0 || Integer.parseInt(ptsPossStr) >100){
+        			error("Please enter a valid point.");
+            	}
+            	else{
+            		question.setPtsPossible(Integer.parseInt(ptsPossStr));
+            	}
+        	}catch (Exception e){
+        		invalid = true;
+        		System.out.println("once");
+        		question.setPtsPossible(0);
+        		error("Please reenter a valid point.");	
+        	}
+        	
         }
 
 
-        try {
-            ptsPoss = Integer.parseInt(ptsPossStr);
-        } catch (NumberFormatException e) {
-            error("Points possible must be a valid number.");
-        }
+//        try {
+//            ptsPoss = Integer.parseInt(ptsPossStr);
+//        } catch (NumberFormatException e) {
+//        	invalid = true;
+//            error("Points possible must be a valid number.");
+//        }
         
         question.setPtsPossible(ptsPoss);
 //        if (isNew) {

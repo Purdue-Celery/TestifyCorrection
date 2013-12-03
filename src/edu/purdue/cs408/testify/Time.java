@@ -45,4 +45,5 @@ public class Time implements Serializable {
     public String toString() {
         return String.format("%d:%02d %s", hour, minute, am ? "AM" : "PM");
     }
+    
 }
