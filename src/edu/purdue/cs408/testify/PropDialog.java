@@ -150,6 +150,7 @@ public class PropDialog extends javax.swing.JDialog {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // close this JFrame
+    	this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void compCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compCheckboxActionPerformed
