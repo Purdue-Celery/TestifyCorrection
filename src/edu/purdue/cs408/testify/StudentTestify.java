@@ -565,14 +565,14 @@ public class StudentTestify extends javax.swing.JFrame {
             //QuestionBox1.setText(questions.get(questionIndex + 1).getPrompt());
             
            
-            codeBox.setText(questions.get(questionIndex).getAnswer());
+            //codeBox.setText(questions.get(questionIndex).getAnswer());
             compilerOutput.setText("");
             PointsPossible1.setText("Points: "+questions.get(questionIndex).getPtsPossible());
             
             if(questions.get(questionIndex).isAnswered())
-            	AnswerBox.setText(questions.get(questionIndex).getAnswer());
+            	codeBox.setText(questions.get(questionIndex).getAnswer());
             else
-            	AnswerBox.setText("");
+            	codeBox.setText("");
           
         } else { // Multiple Choice
             /*if (questionIndex < questions.size() - 1)
