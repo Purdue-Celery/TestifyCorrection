@@ -431,7 +431,7 @@ public class StudentTestify extends javax.swing.JFrame {
 
         jLabel2.setText("Thank you for taking the exam. Your exam has been saved.");
 
-        exit.setText("Open Test");
+        exit.setText("Exit Test");
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
@@ -773,7 +773,7 @@ public class StudentTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_firstNameTextActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        //System.exit(0);        // TODO add your handling code here:
+        System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_exitActionPerformed
 
     private void MCAnswer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCAnswer1ActionPerformed
