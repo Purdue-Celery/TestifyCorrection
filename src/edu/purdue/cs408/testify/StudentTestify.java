@@ -207,7 +207,7 @@ public class StudentTestify extends javax.swing.JFrame {
         AnswerBox.setRows(5);
         AnswerBoxScroll.setViewportView(AnswerBox);
 
-        PointsPossible.setText("Points: 25");
+        //PointsPossible.setText("Points: 25");
 
         org.jdesktop.layout.GroupLayout ShortAnswerCardLayout = new org.jdesktop.layout.GroupLayout(ShortAnswerCard);
         ShortAnswerCard.setLayout(ShortAnswerCardLayout);
@@ -257,7 +257,7 @@ public class StudentTestify extends javax.swing.JFrame {
         QuestionBox2.setText("Define Balls.");
         QuestionBoxScroll2.setViewportView(QuestionBox2);
 
-        PointsPossible2.setText("Points: 25");
+        //PointsPossible2.setText("Points: 25");
 
         MultipleChoiceGroup.add(MCAnswer1);
         MCAnswer1.setText("balls 1");
@@ -370,7 +370,7 @@ public class StudentTestify extends javax.swing.JFrame {
         codeBox.setName("CodeInput"); // NOI18N
         AnswerBoxScroll1.setViewportView(codeBox);
 
-        PointsPossible1.setText("Points: 25");
+        //PointsPossible1.setText("Points: 25");
 
         compileBtn.setText("Compile");
         compileBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -547,6 +547,7 @@ public class StudentTestify extends javax.swing.JFrame {
                 QuestionBox.setText(questions.get(questionIndex + 1).getPrompt());
             else*/
                 QuestionBox.setText(questions.get(questionIndex).getPrompt());
+                PointsPossible.setText("Points: "+questions.get(questionIndex).getPtsPossible());
 
           
         } else if (question.equals("Programming")) {
@@ -560,6 +561,7 @@ public class StudentTestify extends javax.swing.JFrame {
            
             codeBox.setText(questions.get(questionIndex).getAnswer());
             compilerOutput.setText("");
+            PointsPossible1.setText("Points: "+questions.get(questionIndex).getPtsPossible());
           
         } else { // Multiple Choice
             /*if (questionIndex < questions.size() - 1)
@@ -600,6 +602,7 @@ public class StudentTestify extends javax.swing.JFrame {
         card.show(QuestionCards, question);
         QuestionNumber.setText(String.valueOf(questionIndex + 1));
         QuestionNumber.repaint();
+        PointsPossible2.setText("Points: "+questions.get(questionIndex).getPtsPossible());
     }
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
