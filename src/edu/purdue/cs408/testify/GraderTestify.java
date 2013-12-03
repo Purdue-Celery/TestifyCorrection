@@ -198,7 +198,7 @@ public class GraderTestify extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Compiles?");
+        //jLabel2.setText("Compiles?");
 
         commentsTextArea.setColumns(20);
         commentsTextArea.setRows(5);
@@ -206,7 +206,7 @@ public class GraderTestify extends javax.swing.JFrame {
 
         commentsLabel.setText("Comments ");
 
-        whichLangLabel.setText("jLabel3");
+        whichLangLabel.setText("No Language specified");
 
         testMenu.setMnemonic('t');
         testMenu.setText("Test");
@@ -505,9 +505,9 @@ public class GraderTestify extends javax.swing.JFrame {
     }//GEN-LAST:event_pointsPossTextFieldActionPerformed
 
     private void questionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionComboBoxActionPerformed
-    	 saveQuestion();
         if (questionComboBox.getSelectedItem() != null && !((String) (questionComboBox.getSelectedItem())).equals("" + current)) {
-            isNew = false;
+       	 	saveQuestion();
+        	isNew = false;
             int qNum = Integer.parseInt((String) questionComboBox.getSelectedItem());
             current = qNum;
             loadQuestion(test.getQuestion(current - 1));
