@@ -887,8 +887,12 @@ public class InstructorTestify extends javax.swing.JFrame {
                 test = Test.open(f);
                 testFile = f;
 
-            } catch (IOException ex) {
-                Logger.getLogger(InstructorTestify.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	JOptionPane.showMessageDialog(this,
+            		    "Invalid file format",
+            		    "Open file failed",
+            		    JOptionPane.ERROR_MESSAGE);
+                //Logger.getLogger(InstructorTestify.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         } else {
