@@ -898,10 +898,9 @@ public class InstructorTestify extends javax.swing.JFrame {
         } else {
             return;
         }
-
         // refresh form
         //qList = (ArrayList) test.getQuestions();
-        if ( test.length() <= 0) {
+        if (test == null || test.length() <= 0) {
             newTest();
         } else {
         	System.out.println(test.length());
