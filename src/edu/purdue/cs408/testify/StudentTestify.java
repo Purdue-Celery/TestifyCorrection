@@ -529,11 +529,14 @@ public class StudentTestify extends javax.swing.JFrame {
 
     private void saveAnswer(String question) {
         if (question.equals("ShortAnswer")) {
-            questions.get(questionIndex).setAnswer(AnswerBox.getText() + QuestionBox.getText());
+            questions.get(questionIndex).setAnswer(AnswerBox.getText());
+            questions.get(questionIndex).setAnswered(true);
         } else if (question.equals("Programming")) {
             questions.get(questionIndex).setAnswer(codeBox.getText());
             ((Programming)(questions.get(questionIndex))).setCompilerOutput(compilerOutput.getText());
+            questions.get(questionIndex).setAnswered(true);
         } else {
+        	questions.get(questionIndex).setAnswered(true);
         }
 
     }
@@ -548,7 +551,10 @@ public class StudentTestify extends javax.swing.JFrame {
             else*/
                 QuestionBox.setText(questions.get(questionIndex).getPrompt());
                 PointsPossible.setText("Points: "+questions.get(questionIndex).getPtsPossible());
-
+                if(questions.get(questionIndex).isAnswered())
+                	AnswerBox.setText(questions.get(questionIndex).getAnswer());
+                else
+                	AnswerBox.setText("");
           
         } else if (question.equals("Programming")) {
             /*if (questionIndex < questions.size() - 1)
@@ -562,6 +568,11 @@ public class StudentTestify extends javax.swing.JFrame {
             codeBox.setText(questions.get(questionIndex).getAnswer());
             compilerOutput.setText("");
             PointsPossible1.setText("Points: "+questions.get(questionIndex).getPtsPossible());
+            
+            if(questions.get(questionIndex).isAnswered())
+            	AnswerBox.setText(questions.get(questionIndex).getAnswer());
+            else
+            	AnswerBox.setText("");
           
         } else { // Multiple Choice
             /*if (questionIndex < questions.size() - 1)
@@ -651,14 +662,15 @@ public class StudentTestify extends javax.swing.JFrame {
             Next.setText("Next");
         if (questionIndex > 0) {
             Previous.setEnabled(true);
+            questionIndex--;
+            setQuestionData(questions.get(questionIndex).getClass().getSimpleName());
         }
         else {
             Previous.setEnabled(false);
-            setQuestionData(questions.get(questionIndex).getClass().getSimpleName());
+            //setQuestionData(questions.get(questionIndex).getClass().getSimpleName());
             return;
         }
-        setQuestionData(questions.get(questionIndex).getClass().getSimpleName());
-        questionIndex--;
+        
 
     }//GEN-LAST:event_PreviousActionPerformed
 

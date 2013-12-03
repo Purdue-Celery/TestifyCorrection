@@ -11,6 +11,7 @@ public abstract class Question implements Serializable {
     private String answer;
     private int ptsPossible;
     private int ptsEarned;
+    private boolean answered = false;
     
     /** Create a blank question. */
     protected Question() {
@@ -66,5 +67,14 @@ public abstract class Question implements Serializable {
     public void setPtsEarned(int ptsEarned) {
         this.ptsEarned = ptsEarned;
     }
+
+	public boolean isAnswered() {
+		return answered;
+	}
+
+	public void setAnswered(boolean answered) {
+		this.answered = answered;
+	}
+    
 
 }
