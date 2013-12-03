@@ -907,17 +907,20 @@ public class InstructorTestify extends javax.swing.JFrame {
                 test = Test.open(f);
                 testFile = f;
 
-            } catch (IOException ex) {
-                Logger.getLogger(InstructorTestify.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	JOptionPane.showMessageDialog(this,
+            		    "Invalid file format",
+            		    "Open file failed",
+            		    JOptionPane.ERROR_MESSAGE);
+                //Logger.getLogger(InstructorTestify.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         } else {
             return;
         }
-
         // refresh form
         //qList = (ArrayList) test.getQuestions();
-        if ( test.length() <= 0) {
+        if (test == null || test.length() <= 0) {
             newTest();
         } else {
         	System.out.println(test.length());

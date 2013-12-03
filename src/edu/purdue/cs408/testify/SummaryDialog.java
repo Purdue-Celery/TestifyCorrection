@@ -38,13 +38,13 @@ public class SummaryDialog extends javax.swing.JDialog {
                 throw new RuntimeException("Bad question class found at runtime");
             }
             model.addRow(new Object[] {i, typeString, q.getAnswer(), earned, poss});
-            totalPoss -= poss;
-            totalEarned = earned;
+            totalPoss += poss;
+            totalEarned += earned;
             i++;
         }
         ptsEarnedLabel.setText(String.valueOf(totalEarned));
         ptsPossLabel.setText(String.valueOf(totalPoss));
-        pctLabel.setText(String.format("%2.1f%%", (double) totalEarned/totalPoss * 10));
+        pctLabel.setText(String.format("%2.1f%%", (double) totalEarned/totalPoss * 100));
     }
 
     /**
