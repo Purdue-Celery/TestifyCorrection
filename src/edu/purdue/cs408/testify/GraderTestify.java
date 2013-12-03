@@ -240,7 +240,7 @@ public class GraderTestify extends javax.swing.JFrame {
         saveMenuItem.setText("Save");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveMenuItemActionPerformed(evt);
+            	saveAsMenuItemActionPerformed(evt);
             }
         });
         testMenu.add(saveMenuItem);
@@ -250,7 +250,7 @@ public class GraderTestify extends javax.swing.JFrame {
         saveAsMenuItem.setDisplayedMnemonicIndex(5);
         saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveAsMenuItemActionPerformed(evt);
+            	saveMenuItemActionPerformed(evt);
             }
         });
         testMenu.add(saveAsMenuItem);
@@ -382,6 +382,7 @@ public class GraderTestify extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+    	System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void nextQButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextQButtonMouseClicked
@@ -411,7 +412,8 @@ public class GraderTestify extends javax.swing.JFrame {
                     }
                     this.setTitle("Testify - " + testFile.getName());
                 } catch (IOException ex) {
-                    Logger.getLogger(GraderTestify.class.getName()).log(Level.SEVERE, null, ex);
+                	System.out.println(ex);
+                	return;
                 }
                
             }
@@ -524,8 +526,9 @@ public class GraderTestify extends javax.swing.JFrame {
             try {
                 key = Test.open(f);
             } catch (IOException ex) {
-                Logger.getLogger(GraderTestify.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            	System.out.println(ex);
+            	return;
+            } 
             
         }
 
@@ -707,13 +710,13 @@ public class GraderTestify extends javax.swing.JFrame {
 
     private void loadKeyAnswer() {
         keyAnswerTextArea.setEnabled(true);
-        if(current > 1)
+        if(current >= 1)
         keyAnswerTextArea.setText(test.getQuestion(current - 1).getAnswer());
     }
 
     private void loadStudentAnswer() {
         answerTextArea.setEnabled(true);
-        if(current > 1)
+        if(current >= 1)
         answerTextArea.setText(key.getQuestion(current - 1).getAnswer());
     }
 

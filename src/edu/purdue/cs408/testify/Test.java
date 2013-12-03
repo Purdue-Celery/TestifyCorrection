@@ -86,9 +86,16 @@ public class Test implements Serializable {
         could not be read.
         */
     public static Test open(File file) throws IOException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+    	ObjectInputStream in;
+    	try{
+    		in = new ObjectInputStream(new FileInputStream(file));
+    	}catch (Exception e)
+    	{
+    		throw new IOException("Incorrect file");
+    	}
         Test test;
         try {
+        	
             test = (Test) in.readObject();
         } catch (ClassNotFoundException e) {
             test = null;
